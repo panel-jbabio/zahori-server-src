@@ -1,16 +1,13 @@
 # base image
 FROM node:14.18.3-alpine as angularbuilder
-
-RUN npm install -g @angular/cli@11.2.10
-
-COPY package.json /code/package.json
-WORKDIR /code
+WORKDIR /usr/src/app
+COPY package.json package-lock.json ./
 RUN npm install
+COPY . .
+RUN npm run build
 
-COPY . /code/
-RUN ng build --prod
-
-FROM scratch
-COPY --from=angularbuilder /code/dist /
-
+FROM nginx:1.20.2-alpine
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=angularbuilder /usr/src/app/dist /usr/share/nginx/html/zahori
+EXPOSE 80
 

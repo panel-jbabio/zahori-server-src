@@ -1,3 +1,18 @@
-set DOCKER_BUILDKIT=1
-docker build -o backend/src/main/resources/static/ frontend
-docker build -t zahoriaut/zahori-server:0.1.16 backend
+
+if "%~1"=="" goto ERROR
+
+set version=%1
+
+echo "Build started!!!"
+cd backend
+call docker-build.bat %version%
+cd ../frontend
+call docker-build.bat %version%
+cd ..
+
+:ERROR
+
+echo "Please, introduce the build version"
+
+:END
+echo "Build finished!!!"

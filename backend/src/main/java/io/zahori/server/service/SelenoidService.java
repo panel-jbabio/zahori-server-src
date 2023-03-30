@@ -58,10 +58,10 @@ public class SelenoidService {
 
     private static final Logger LOG = LoggerFactory.getLogger(SelenoidService.class);
 
-    @Value("${ZAHORI_SELENOID_UI_INTERNAL_HOST}")
+    @Value("${ZAHORI_SELENOID_UI_INTERNAL_HOST:localhost}")
     private String selenoidUiHost;
 
-    @Value("${ZAHORI_SELENOID_UI_INTERNAL_PORT}")
+    @Value("${ZAHORI_SELENOID_UI_INTERNAL_PORT:8081}")
     private String selenoidUiPort;
 
     private CaseExecutionsRepository caseExecutionsRepository;
@@ -206,6 +206,8 @@ public class SelenoidService {
             TimeUnit.SECONDS.sleep(seconds);
         } catch (InterruptedException e) {
             LOG.error("Error executing sleep for {} seconds", seconds);
+            // Restore interrupted state...
+            Thread.currentThread().interrupt();
         }
     }
 }

@@ -1,5 +1,5 @@
 .git
 .settings
-target
+.gitignore
 evidences
 logs

@@ -41,10 +41,10 @@ public class SelenoidController {
 
     private static final Logger LOG = LoggerFactory.getLogger(SelenoidController.class);
 
-    @Value("${ZAHORI_SELENOID_UI_EXTERNAL_HOST}")
+    @Value("${ZAHORI_SELENOID_UI_EXTERNAL_HOST:localhost}")
     private String selenoidUiHost;
 
-    @Value("${ZAHORI_SELENOID_UI_EXTERNAL_PORT}")
+    @Value("${ZAHORI_SELENOID_UI_EXTERNAL_PORT:8080}")
     private String selenoidUiPort;
     
     /**
